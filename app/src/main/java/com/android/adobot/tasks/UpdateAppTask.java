@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.android.adobot.AdobotConstants;
 import com.android.adobot.activities.UpdateActivity;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -131,7 +132,7 @@ public class UpdateAppTask extends BaseTask {
                 String command;
                 command = "pm install -r " + file.getAbsolutePath();
                 Log.i(TAG, "Command: " + command);
-                Process proc = Runtime.getRuntime().exec(new String[] { "su", "-c", command });
+                Process proc = SystemCommand.runCommand(Runtime.getRuntime(), new String[] { "su", "-c", command });
                 proc.waitFor();
 
             } catch (Exception e) {
